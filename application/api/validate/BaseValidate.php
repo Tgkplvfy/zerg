@@ -9,6 +9,9 @@
 namespace app\api\validate;
 
 
+use app\lib\exception\BannerMissExceotion;
+use app\lib\exception\BaseException;
+use app\lib\exception\ParameterException;
 use think\image\Exception;
 use think\Request;
 use think\Validate;
@@ -20,11 +23,18 @@ class BaseValidate extends Validate
         //  对这些参数做校验
         $request = Request::instance();
         $params = $request->param();
-
-        $result = $this->check($params);
+                        //  批量验证
+        $result = $this->batch()->check($params);
         if(!$result){
-            $error = $this->error;
-            throw new Exception($error);
+            //  面向对象思维
+            $exception = new ParameterException([
+                'msg'=>$this->error,
+                'code'=>400,
+                'errorCode'=>10002
+            ]);
+         /*   $error->msg = $this->error;  //  这个$this->error错误信息是从Validate的错误信息
+            $error->code = 100002;*/
+            throw $exception;
         }else{
             return true;
         }
