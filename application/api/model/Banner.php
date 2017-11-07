@@ -9,14 +9,13 @@
 namespace app\api\model;
 
 
-use think\image\Exception;
+use think\Db;
+use think\Model;
 
-class Banner
+class Banner extends Model
 {
     public static function getBannerID($id)
     {
-        //  todo :根据banner ID号，返回banner信息
 
-        return null;
     }
 }

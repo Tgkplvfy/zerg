@@ -9,7 +9,6 @@
 namespace app\lib\exception;
 
 
-use Exception;
 use think\exception\Handle;
 use think\Log;
 use think\Request;
@@ -22,7 +21,7 @@ class ExceptionHandler extends Handle
     //  需要返回客户端当前请求的URL路径
 
     //  重写了handle类的render方法
-    public function render(Exception $e)
+    public function render(\Exception $e)
     {
         //  在render方法要处理两种情况
         // 1.是处理用户行文导致的异常
@@ -58,7 +57,7 @@ class ExceptionHandler extends Handle
         return json($result,$this->code);
     }
 
-    private function recordErrorLog(Exception $e){
+    private function recordErrorLog(\Exception $e){
        //  初始化日志
         Log::init([ //  因为在config.php配置文件关闭默认日志，在里面记录日志的时候需要初始化
             'type'=>'File',
