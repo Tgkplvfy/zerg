@@ -39,4 +39,25 @@ class BaseValidate extends Validate
             return true;
         }
     }
+
+    /*
+     * 自定义验证正整数的验证方法
+     * */
+    protected function isPositiveInteger($value,$rule='',$data='',$field=''){
+        if(is_numeric($value) &&is_int($value+0)&&($value+0)>0){
+            return true;
+        }else{
+            return false;
+           /* return $field.'必须是正整数';*/
+        }
+    }
+
+    protected function isNotEmpty($value, $rule='', $data='', $field='')
+    {
+        if (empty($value)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 }
